@@ -1,6 +1,6 @@
 ### customer_transactions_history
 
-[***Documentaion to this project solution**](doc.md)
+[**Documentaion to this project solution**](doc.md)
 
 ### Aligning on Expectations
 
