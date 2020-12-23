@@ -1,5 +1,7 @@
 ### customer_transactions_history
 
+[***Documentaion to this project solution**](doc.md)
+
 ### Aligning on Expectations
 
 The purpose of this test is to assess your problem solving skills (see https://i.datachef.co/problem-solvers), creativity and experience in tackling a data science question. 
