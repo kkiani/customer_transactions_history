@@ -25,8 +25,8 @@ def predict(customer_id: int, month: int):
     predict_model.predict(customer_id, month)
 
 @app.command()
-def top_product():
-    pass
+def top_product(year: int, month: int):
+    visuals.plot_top_5(year, month)
 
 if __name__ == '__main__':
     app()
