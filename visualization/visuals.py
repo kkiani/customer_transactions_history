@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def plot_sales():
-    df = pd.read_csv('data/customer_trans.csv')
+    df = pd.read_csv('data/customer_trans.csv', index_col='customer_id')
     
     x = df.customer_id.astype(str).values
     y = df['count'].values
