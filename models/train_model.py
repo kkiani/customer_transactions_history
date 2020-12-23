@@ -1,9 +1,10 @@
-import argparse
 import math
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 import typer
+from dateutil.relativedelta import *
 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
@@ -16,17 +17,29 @@ from tensorflow.keras.layers import Dense, LSTM
 import warnings
 warnings.filterwarnings('ignore')
 
-def train(selected_month: int, epochs: int):
+def product_frequency_between(df, start_date, end_date):
+    x = df.loc[:, df.columns.to_series().between(str(start_date), str(end_date))].values
+    y = df.loc[:, df.columns.to_series().between(str(end_date), str(end_date + relativedelta(months=3)))].sum(axis=1).values
+    
+    return x, y
+
+def train(epochs: int):
     # loading dataset
     df = pd.read_csv('data/trans_per_month.csv', index_col='customer_id')
 
     # calculating product frequency  per months
-    prediction_start_date = str(datetime.date(2019, selected_month, 1))
-    prediction_end_date = str(datetime.date(2019, selected_month+3, 1)) 
+    X = []
+    y = []
+    for i in range(len(df.columns) - 24):
+        start = datetime.date(2017, 1, 1) + relativedelta(months=i)
+        end = start + relativedelta(months=24)
+        new_x , new_y = product_frequency_between(df, start, end)
+        X.append(new_x)
+        y.append(new_y)
 
-    # selecting data
-    X = df.loc[:, df.columns.to_series().between('2017-01-01', prediction_start_date)].values
-    y = df.loc[:, df.columns.to_series().between(prediction_start_date, prediction_end_date)].sum(axis=1).values
+    
+    X = np.concatenate(X)
+    y = np.concatenate(y)
 
     # normalizing data
     x_scaler = MinMaxScaler()
@@ -55,7 +68,7 @@ def train(selected_month: int, epochs: int):
     model.summary()
 
     # training model
-    history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=epochs, verbose=0)
+    history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=epochs, verbose=1)
 
     # saveing model
     model.save('models/serialized/lstm_model')

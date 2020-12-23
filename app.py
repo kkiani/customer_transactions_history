@@ -16,9 +16,8 @@ def product_transactions(product_id: str):
     visuals.plot_sale_frequency_by_mouth(product_id)
 
 @app.command(help='Train the model for prediction.')
-def train(month: int, epochs: int=50):
-    typer.secho(f'🍻 You are training the model with month={month}, make sure to pass same month in prediction', fg=typer.colors.MAGENTA)
-    train_model.train(selected_month=month, epochs=epochs)
+def train(epochs: int=50):
+    train_model.train(epochs=epochs)
 
 @app.command( help='Predict the total number of transactions for the next three months per customer anywhere in 2019')
 def predict(customer_id: int, month: int):
