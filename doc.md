@@ -5,7 +5,7 @@ this package contains both production and development files for predicting and v
 - all dataset including raw data and processed data is in data directory
 - jupyter notebook file has been used for developmnet tests and are accessible through notebook folders
 - the `app.py` file is the root file of this package
-- svr results were lower than lstm model for that reason the lstm model choosed for production, but svr is also availabe through `prediction-development` notebook.
+- svr results were lower than lstm model for that reason the lstm model have been choosed for production, but svr is also availabe through `prediction-development` notebook.
 - model serialization artifacts including both trained model and scalers are available inside the `models/serialized` path.
 
 ### installing dependencies
