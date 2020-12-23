@@ -14,17 +14,14 @@ def customer_transactions():
 def product_transactions(product_id: int):
     typer.echo('f')
 
-@app.command('pr', help='Predict the total number of transactions for the next three months per customer anywhere in 2019')
-def prediction(customer_id: Optional[str]=None, month: Optional[int]=1, train: bool=False):
-    if train == False and customer_id == None:
-        raise typer.BadParameter('prediction mode needs customer id.')
-    
-    
-    if train:
-        train_model.train(selected_month=month)
-    else:
-        predict_model.predict(customer_id)
+@app.command('train', help='Train the model for prediction.')
+def train(month: int, epochs: int=50):
+    typer.secho(f'🍻 You are training the model with month={month}, make sure to pass same month in prediction', fg=typer.colors.MAGENTA)
+    train_model.train(selected_month=month, epochs=epochs)
 
+@app.command('predict', help='Predict the total number of transactions for the next three months per customer anywhere in 2019')
+def predict(customer_id: int, month: int):
+    predict_model.predict(customer_id, month)
 
 @app.command()
 def top_product():
