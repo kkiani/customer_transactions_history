@@ -2,13 +2,14 @@ import typer
 from typing import Optional
 from typer.main import param_path_convertor
 from models import predict_model, train_model
+from visualization import visuals
 
 
 app = typer.Typer()
 
 @app.command(help='Create an ordered (descending) plot that shows the total number of transactions per customer from the most active customer to the least active one.')
 def customer_transactions():
-    typer.echo('ok')
+    visuals.plot_sales()
 
 @app.command(help='Given any product ID, create a plot to show its transaction frequency per month for the year 2018.')
 def product_transactions(product_id: int):
