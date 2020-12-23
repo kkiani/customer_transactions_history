@@ -23,7 +23,7 @@ def train(epochs: int=50):
 def predict(customer_id: int, month: int):
     predict_model.predict(customer_id, month)
 
-@app.command()
+@app.command(help='The top 5 products that drove the highest sales over the last six months')
 def top_product(year: int, month: int):
     visuals.plot_top_5(year, month)
 
