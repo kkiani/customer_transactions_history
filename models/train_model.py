@@ -49,7 +49,7 @@ def train(selected_month: int, epochs: int):
     model = Sequential()
     model.add(LSTM(16, input_shape=(X_train.shape[1], X_train.shape[2]), return_sequences=True))
     model.add(LSTM(8, input_shape=(X_train.shape[1], X_train.shape[2])))
-    model.add(Dense(1, activation='linear'))
+    model.add(Dense(1, activation='relu'))
 
     model.compile(loss='mean_squared_error', optimizer='adam')
     model.summary()
