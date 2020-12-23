@@ -12,8 +12,8 @@ def customer_transactions():
     visuals.plot_sales()
 
 @app.command(help='Given any product ID, create a plot to show its transaction frequency per month for the year 2018.')
-def product_transactions(product_id: int):
-    typer.echo('f')
+def product_transactions(product_id: str):
+    visuals.plot_sale_frequency_by_mouth(product_id)
 
 @app.command(help='Train the model for prediction.')
 def train(month: int, epochs: int=50):
